@@ -1,0 +1,7 @@
+*.spec
+build/
+dist/
+*.py.autosave
+*.pyproject
+*.pyproject.user
+*.ico

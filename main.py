@@ -1,6 +1,7 @@
 import sys
+from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget,QTextEdit, QApplication, QPushButton, QComboBox, QDialog, QFileDialog, QFormLayout,QLineEdit, QGridLayout, QCheckBox, QLabel, QGroupBox, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QProgressBar, QWidget,QTextEdit, QApplication, QPushButton, QComboBox, QDialog, QFileDialog, QFormLayout,QLineEdit, QGridLayout, QCheckBox, QLabel, QGroupBox, QVBoxLayout, QHBoxLayout
 
 import ssplib
 from time import sleep
@@ -15,18 +16,20 @@ class MainWindow(QDialog):
 # INTERFACE
         self.setWindowTitle('PNSK40-044')
         self.setFixedWidth(300)
+        self.setWindowIcon(QIcon('icon.ico'))
         self.log = QTextEdit()
         self.log.setReadOnly(True)
 
         self.progress = QProgressBar(self)
         self.progress.setGeometry(0, 0, 300, 25)
         self.progress.setMaximum(100)
+        self.progress.setTextVisible(False)
 
         grid = QGridLayout()
         grid.addWidget(self.comGroup(), 0, 0)
         grid.addWidget(self.Table(), 0, 1)
-        grid.addWidget(self.progress, 2, 0)
-        grid.addWidget(self.log, 3, 0,2,2)#fromRow,  fromColumn,  rowSpan,  columnSpan
+        grid.addWidget(self.progress, 2, 0, 1, 2)
+        grid.addWidget(self.log, 3, 0, 2, 2)#fromRow,  fromColumn,  rowSpan,  columnSpan
         self.setLayout(grid)
         self.log.append("выберите скорость и COM")
 
@@ -213,8 +216,8 @@ class MainWindow(QDialog):
             except (SerialException): self.log.append('Не смог открыть %s' % (cur_item))
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    form = MainWindow()
-    form.show()
-    app.exec_()
+#if __name__ == "__main__":
+app = QApplication(sys.argv)
+form = MainWindow()
+form.show()
+app.exec_()

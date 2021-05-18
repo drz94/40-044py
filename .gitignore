@@ -1,6 +1,7 @@
 *.spec
 build/
 dist/
+__pycache__/
 *.py.autosave
 *.pyproject
 *.pyproject.user
